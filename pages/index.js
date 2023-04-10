@@ -1,39 +1,42 @@
 import tw from "styled-components"
-import mapboxgl from "!mapbox-gl"
-import { useEffect } from "react"
+import Map from "./components/map"
+import UberLogoImg from './assets/Uber_logo_2018.png'
+import UserImg from './assets/IMG-8016.jpg'
 
-mapboxgl.accessToken = 'pk.eyJ1IjoicGF2bG9zYW50b25pb3UxMyIsImEiOiJjbGdheXVxbzIxNXNyM2xwaWJiNWkyNW01In0.gRmZXMcGc2BJ1w3tSDTunQ'
+
 
 export default function Home() {
 
- useEffect(() => {
-  const map = new mapboxgl.Map({
-    container: 'map',
-    center: [-99.29011, 39.39172],
-    style: 'mapbox://styles/mapbox/streets-v11',
-    zoom: 9
-    });
- },[])
-  
-
+ 
 
   return (
-    <Wrapper className="flex flex-col bg-red-300 h-screen">
-      <Map id="map" className="bg-red-500 flex-1"></Map>
-      <ActionItems className="flex-1">Start</ActionItems>
+    <Wrapper className="flex flex-col  h-screen">
+      <Map></Map>
+      <ActionItems className="flex-1">
+        {/* header */}
+        <Header className="flex">
+          <UberLogo className="h-28 " src={UberLogoImg.src} />
+          <Profile className="flex">
+            <Name>Pavlos Antoniou</Name>
+              <UserImage className="h-14"
+              src={UserImg.src}/>
+          </Profile>
+
+        </Header>
+        {/* ActionButtons */}
+
+        {/* inputButton */}
+
+      </ActionItems>
     </Wrapper>
   )
 }
 
 
-const Wrapper = tw.div`
-  
-`
-
-const Map = tw.div`
-
-`
-
-const ActionItems = tw.div`
-
-`
+const Wrapper = tw.div``
+const ActionItems = tw.div``
+const Header = tw.div``
+const UberLogo = tw.img``
+const Profile = tw.div``
+const Name = tw.div``
+const UserImage = tw.img``
