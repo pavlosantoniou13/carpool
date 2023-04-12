@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import BackImg from './assets/back.png'
 import CircleImg from './assets/circle.png'
 import line from './assets/line.png'
@@ -10,12 +10,16 @@ import Link from 'next/link'
 
 
 function Search() {
+
+    const [pickup, setPickup] = useState("")
+    const [dropoff, setDropoff] = useState("")
+
   return (
     <Wrapper className='bg-gray-200 h-screen'>
        
         <ButtonContainer className='bg-white px-4'>
             <Link href="/">
-                <BackButton className='h-12' src={BackImg.src}/>
+                <BackButton className='h-12 cursor-pointer' src={BackImg.src}/>
             </Link>
         </ButtonContainer>
 
@@ -26,8 +30,12 @@ function Search() {
                 <Square className='h-3' src={SquareImg.src} />
             </FromToIcons>
             <InputBoxes className='flex flex-col flex-1 '>
-                <Input className='outline-none border-none rounded-2 p-2 my-2 h-10 bg-gray-200' placeholder='Enter pickup place' />
-                <Input className='outline-none border-none rounded-2 p-2 my-2 h-10 bg-gray-200' placeholder='Enter pickup place' />
+                <Input className='outline-none border-none rounded-2 p-2 my-2 h-10 bg-gray-200' placeholder='Enter pickup place' 
+                value={pickup}
+                onChange={(e) => setPickup(e.target.value)} />
+                <Input className='outline-none border-none rounded-2 p-2 my-2 h-10 bg-gray-200' placeholder='Where to?'
+                value={dropoff} 
+                onChange={(e) => setDropoff(e.target.value)}/>
             </InputBoxes>
             <PlusIcon className='ml-3  rounded-full  w-10 h-10 bg-gray-200' src={AddImg.src} />
        </InputContainer>
@@ -35,7 +43,19 @@ function Search() {
            <StarIcon className='mr-2 rounded-full bg-gray-400 w-10 h-10 p-2' src={StarImg.src} /> 
            Saved Places
        </SavedPlaces>
-       {/* condfirm contianer */}
+        <Link href={{
+            pathname: '/confirm',
+            query: {
+                pickup: pickup,
+                dropoff: dropoff
+            }
+        }}>
+            <ConfirmButtonContainer className='bg-black text-white text-center mt-2 mx-4 px-4 py-3 text-2xl cursor-pointer'>
+                Confirm Locations
+            </ConfirmButtonContainer>
+        </Link>
+        
+       
     </Wrapper>
   )
 }
@@ -53,5 +73,6 @@ const Input = tw.input``
 const PlusIcon = tw.img``
 const StarIcon = tw.img``
 const SavedPlaces = tw.div``
+const ConfirmButtonContainer = tw.div``
 
 export default Search
