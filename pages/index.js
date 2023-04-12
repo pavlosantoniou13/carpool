@@ -3,27 +3,54 @@ import Map from "./components/map"
 import UberLogoImg from './assets/Uber_logo_2018.png'
 import UserImg from './assets/IMG-8016.jpg'
 import carImg from './assets/UberX.webp'
+import home from './assets/home.png'
 import list from './assets/list.png'
 import Link from "next/link"
+import { auth } from "../firebase"
+import { onAuthStateChanged, signOut } from "firebase/auth"
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
 
 
 
 
 export default function Home() {
 
- 
+ const [user, setUser] = useState(null)
+ const router = useRouter()
+
+ useEffect(() => {
+  return onAuthStateChanged(auth, user => {
+    if(user) {
+      setUser({
+        name: user.displayName,
+        photoUrl: user.photoURL,
+
+      })
+    } else {
+      setUser(null)
+      router.push('/login')
+    }
+  })
+ }, [])
 
   return (
     <Wrapper className="flex flex-col  h-screen">
+      <ButtonContainer className='w-10 rounded-full absolute top-4 left-4 z-10  shadown-md cursor-pointer'>
+        <Link href="/login">
+          <BackButton src={home.src}/>
+        </Link>
+        </ButtonContainer>
       <Map></Map>
       <ActionItems className="flex-1 p-4">
         {/* header */}
         <Header className="flex justify-between items-center m-5 w-[100%]">
           <UberLogo className="h-12 " src={UberLogoImg.src} />
           <Profile className="flex items-center">
-            <Name className="font-bold mr-4 w-20 text-sm">Pavlos Antoniou</Name>
+            <Name className="font-bold mr-4 w-20 text-sm">{user && user.name}</Name>
               <UserImage className="h-14 w-14 rounded-full border-gray-200 p-px mr-2"
               src={UserImg.src}/>
+              {/*user && user.photoUrl*/}
           </Profile>
 
         </Header>
@@ -67,3 +94,5 @@ const ActionButtons = tw.div``
 const ActionButton = tw.div``
 const ActionButtonImage = tw.img``
 const InputButton = tw.div``
+const ButtonContainer = tw.div``
+const BackButton = tw.img``

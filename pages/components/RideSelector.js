@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import tw from "styled-components"
 import carImg from '../assets/UberX.webp'
 
 
-const RideSelector = () => {
+const RideSelector = ({pickUpCoordinates,dropffCoordinates }) => {
+
+    //Gas price calculator
+
   return (
     <Wrapper className='flex-1 overflow-y-scroll flex flex-col'>
         <Title className='text-gray-500 text-center text-xs py-2 border-b'>
