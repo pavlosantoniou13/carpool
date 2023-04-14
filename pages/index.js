@@ -35,21 +35,23 @@ export default function Home() {
  }, [])
 
   return (
-    <Wrapper className="flex flex-col  h-screen">
+    <Wrapper className="flex flex-col  h-screen ">
       <ButtonContainer className='w-10 rounded-full absolute top-4 left-4 z-10  shadown-md cursor-pointer'>
         <Link href="/login">
-          <BackButton src={home.src}/>
+          <BackButton
+          onClick={() => {signOut(auth)}}
+          src={home.src}/>
         </Link>
         </ButtonContainer>
       <Map></Map>
       <ActionItems className="flex-1 p-4">
         {/* header */}
-        <Header className="flex justify-between items-center m-5 w-[100%]">
-          <UberLogo className="h-12 " src={UberLogoImg.src} />
+        <Header className="flex justify-between items-center  w-[100%]">
+          <UberLogo className="h-14 my-4" src="https://uspto.report/TM/85250264/mark"/>
           <Profile className="flex items-center">
             <Name className="font-bold mr-4 w-20 text-sm">{user && user.name}</Name>
               <UserImage className="h-14 w-14 rounded-full border-gray-200 p-px mr-2"
-              src={UserImg.src}/>
+              src={user && user.photoUrl}/>
               {/*user && user.photoUrl*/}
           </Profile>
 
