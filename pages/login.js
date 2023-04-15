@@ -4,9 +4,7 @@ import UberLogoImg from './assets/Uber_logo_2018.png'
 import { signInWithPopup, onAuthStateChanged, updateProfile } from 'firebase/auth'
 import { auth , provider} from '../firebase'
 import { useRouter } from 'next/router'
-import blingoLogo from './assets/blingo.png'
 import {  db, storage } from "../firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 
 import Link from 'next/link'
@@ -20,7 +18,13 @@ const Login = () => {
         if(user){
           setUser(user)
           router.push('/')
-         
+          setDoc(doc(db, "users", user.uid),{
+            id: user.uid,
+            name: user.displayName,
+            email: user.email
+          })
+        } else {
+          return
         }
       })  
     },[])

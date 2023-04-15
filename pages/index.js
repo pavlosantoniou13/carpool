@@ -63,10 +63,10 @@ export default function Home() {
            Ride
           </Link>
 
-          <ActionButton className="text-xl font-bold transition cursor-pointer transform hover:scale-105 rounded-lg justify-center flex-1 m-1 bg-gray-200 h-32 flex items-center flex-col">
+          <Link href="/allRides" className="text-xl font-bold transition cursor-pointer transform hover:scale-105 rounded-lg justify-center flex-1 m-1 bg-gray-200 h-32 flex items-center flex-col">
           <ActionButtonImage className="h-3/5" src={carImg.src}/>
             All  Rides
-          </ActionButton>
+          </Link>
 
           <ActionButton className="text-xl font-bold transition cursor-pointer transform hover:scale-105 rounded-lg justify-center flex-1 m-1 bg-gray-200 h-32 flex items-center flex-col">
           <ActionButtonImage className="h-3/5" src={carImg.src}/>
