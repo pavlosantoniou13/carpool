@@ -7,6 +7,7 @@ import Link from 'next/link'
 import BackImg from './assets/back.png'
 
 function Confirm() {
+  //add autocorrect on the input field
     const router = useRouter()
     const { pickup, dropoff } = router.query
 

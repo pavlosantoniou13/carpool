@@ -68,10 +68,10 @@ export default function Home() {
             All  Rides
           </Link>
 
-          <ActionButton className="text-xl font-bold transition cursor-pointer transform hover:scale-105 rounded-lg justify-center flex-1 m-1 bg-gray-200 h-32 flex items-center flex-col">
+          <Link href="/addRide" className="text-xl font-bold transition cursor-pointer transform hover:scale-105 rounded-lg justify-center flex-1 m-1 bg-gray-200 h-32 flex items-center flex-col">
           <ActionButtonImage className="h-3/5" src={carImg.src}/>
             Post a ride
-          </ActionButton>
+          </Link>
 
         </ActionButtons>
            
