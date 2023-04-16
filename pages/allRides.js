@@ -62,7 +62,6 @@ function AllRides() {
           </Car>
         ))}
       </CarList>
-      <button onClick={postData}>send data</button>
     </Wrapper>
   );
 }
