@@ -28,13 +28,7 @@ function AllRides() {
     }, [])
 
 
-    //post data
-    const postData = async () => {
-        await addDoc(collection(db, "available_Rides"),{
-            name:"pavlos",
-            destination: "salouga"
-        })
-    }
+    
 
     console.log(data)
 
