@@ -7,9 +7,12 @@ import AddImg from './assets/add_FILL0_wght200_GRAD0_opsz48.png'
 import tw from "styled-components"
 import StarImg from './assets/star.png'
 import Link from 'next/link'
+import { AddressAutofill } from '@mapbox/search-js-react'
 
 
 function Search() {
+
+    const accessToken = "pk.eyJ1IjoicGF2bG9zYW50b25pb3UxMyIsImEiOiJjbGdkeHV5OXIwOWgxM3JwN2V6cDh2eWVzIn0.1o8ix2i0YO2BXk3ErHn9Gg"
 
     const [pickup, setPickup] = useState("")
     const [dropoff, setDropoff] = useState("")
@@ -30,12 +33,18 @@ function Search() {
                 <Square className='h-3' src={SquareImg.src} />
             </FromToIcons>
             <InputBoxes className='flex flex-col flex-1 '>
-                <Input className='outline-none border-none rounded-2 p-2 my-2 h-10 bg-gray-200' placeholder='Enter pickup place' 
-                value={pickup}
-                onChange={(e) => setPickup(e.target.value)} />
-                <Input className='outline-none border-none rounded-2 p-2 my-2 h-10 bg-gray-200' placeholder='Where to?'
-                value={dropoff} 
-                onChange={(e) => setDropoff(e.target.value)}/>
+                <AddressAutofill accessToken={accessToken}>
+                    <input className='outline-none border-none rounded-2 p-2 my-2 h-10 w-[100%] bg-gray-200' placeholder='Enter pickup place' 
+                    value={pickup}
+                    autoComplete='address_level1'
+                    onChange={(e) => setPickup(e.target.value)} />
+                </AddressAutofill>
+                <AddressAutofill accessToken={accessToken}>
+                    <input className='outline-none border-none rounded-2 w-[100%] p-2 my-2 h-10 bg-gray-200' placeholder='Where to?'
+                    autoComplete='address_level1'
+                    value={dropoff} 
+                    onChange={(e) => setDropoff(e.target.value)}/>
+                </AddressAutofill>
             </InputBoxes>
             <PlusIcon className='ml-3  rounded-full  w-10 h-10 bg-gray-200' src={AddImg.src} />
        </InputContainer>
