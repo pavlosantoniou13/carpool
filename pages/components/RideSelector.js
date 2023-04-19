@@ -49,7 +49,8 @@ const RideSelector = ({ pickup, dropoff }) => {
                 {data.origin + "-" + data.destination}
               </Destination>
             </CardDetails>
-            <Price className="text-sm">{/** */}</Price>
+            
+            <Price className="text-sm">{data.price}</Price>
           </Car>
         ))}
       </CarList>

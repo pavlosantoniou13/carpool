@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic"
 
 
-const PlaceSuggest = dynamic(() => import("./components/placeSuggest"),{
+const AddRideComponent = dynamic(() => import("./components/addRideComponent"),{
   ssr: false
 })
 
@@ -9,7 +9,7 @@ const PlaceSuggest = dynamic(() => import("./components/placeSuggest"),{
 function addRide() {
 
   return (
-    <PlaceSuggest />
+    <AddRideComponent />
   )
 }
 

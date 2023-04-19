@@ -1,7 +1,7 @@
 import {  db, storage } from "../../firebase"
 import { AddressAutofill } from '@mapbox/search-js-react'
 import { getDocs, collection,  doc, setDoc, addDoc  } from 'firebase/firestore'
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import BackImg from '../assets/back.png'
 import tw from "styled-components"
 import Link from "next/link"
@@ -21,9 +21,8 @@ function placeSuggest() {
     const [dropffCoordinates, setdropffCoordinatesCoordinates] = useState("")
     const [pickup, setPickup] = useState()
     const [dropoff, setdropff] = useState()
-    const [distance, setDistance] = useState()
     const [milage, setMilage] = useState()
-  
+    const [distance, setDistance] = useState()
     //initializes the data for proccessing
     const intializeData = (e) => {
       e.preventDefault()
@@ -76,29 +75,41 @@ function placeSuggest() {
        */
       const rawDistance = data.data.routes[0].distance.toString()
       const distance = rawDistance.substring(0, 3)
-      console.log(distance)
-      setDistance(distance)
-     
+      
+      // calculate gas price
+     const gasPrice = distance / milage
+
+     setPrice(Math.round(gasPrice))
       
      
-      postData()
+      
     }
+
+    useEffect(() => {
+      if(price !== "") {
+        postData()
+      } else {
+        return
+      }
+    },[price])
+    
   
-    //calculates gas price 
-    const calculateGasPrice = () => {
-      const consumption = 7
-  
-    }
+    console.log(price)
+    
+    
   
     //post data
     const postData = async (e) => {
-      if(name !== "" && origin !== "" && destination !== "" && carBrand !== "" && fuelType !== ""  ){
+      if(name !== "" && origin !== "" && destination !== "" && carBrand !== "" && fuelType !== "" && price !== ""  ){
         await addDoc(collection(db, "available_Rides"),{
           name: name.toString(),
           origin: origin.toString(),
           destination: destination.toString(),
           carBrand: carBrand.toString(),
-          fuelType: fuelType.toString()
+          fuelType: fuelType.toString(),
+          price: price.toString(),
+          distance: distance.toString()
+
         })  
   
         toast.success("You posted your ride succesfully", {
@@ -118,6 +129,7 @@ function placeSuggest() {
         setCarBrand("");
         setFuelType("");
         setPrice("");
+        setDistance("")
         
       } else {
         toast.error("Please make sure all of the inputs are full", {
@@ -132,7 +144,7 @@ function placeSuggest() {
         });
       }
     }
-  
+ 
     return (
       <>
       <ButtonContainer className='w-10 rounded-full absolute  left-4 z-10  shadown-md cursor-pointer'>
