@@ -7,7 +7,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoicGF2bG9zYW50b25pb3UxMyIsImEiOiJjbGdkeHV5OXIwO
 
 const Map = (props) => {
 
-console.log(props.pickUpCoordinates)
+
 
   useEffect(() => {
     const map = new mapboxgl.Map({
@@ -16,6 +16,9 @@ console.log(props.pickUpCoordinates)
       style: "mapbox://styles/mapbox/streets-v12",
       zoom: 9,
     });
+
+    const nav = new mapboxgl.NavigationControl()
+    map.addControl(nav)
 
     if(props.pickUpCoordinates){
       addToMap(map, props.pickUpCoordinates)
@@ -40,6 +43,7 @@ console.log(props.pickUpCoordinates)
     const marker1 = new mapboxgl.Marker()
     .setLngLat([coordinates.lon, coordinates.lat])
     .addTo(map);
+    
   }
 
  

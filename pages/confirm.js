@@ -60,8 +60,8 @@ function Confirm() {
       />
       <RideContainer className="flex-1 flex flex-col h-1/2">
         <RideSelector
-          pickUpCoordinates={pickUpCoordinates}
-          dropffCoordinates={dropffCoordinates}
+          pickup={pickup}
+          dropoff={dropoff}
         />
         <ConfirmButtonContainer className="border-t-2">
           <ConfirmButton className="bg-black text-white my-4 mx-4 py-4 text-center text-xl">
