@@ -41,7 +41,7 @@ const RideSelector = ({ pickup, dropoff }) => {
       </Title>
       <CarList className="overflow-y-scroll">
         {ride.map((data) => (
-          <Car className="flex p-4 items-center ">
+          <Car className="flex p-4 items-center cursor-pointer">
             <CarImage className="h-14 mr-2" src={carImg.src} />
             <CardDetails className="flex-1">
               <Service className="font-medium">{data.name}</Service>
