@@ -45,6 +45,7 @@ function searchFields() {
                 className="outline-none border-none rounded-2 p-2 my-2 h-10 w-[100%] bg-gray-200"
                 placeholder="Enter pickup place"
                 value={pickup}
+                autocomplete="address-level2"
                 onChange={(e) => setPickup(e.target.value)}
               />
             </form>
@@ -61,6 +62,7 @@ function searchFields() {
                 className="outline-none border-none rounded-2 w-[100%] p-2 my-2 h-10 bg-gray-200"
                 placeholder="Where to?"
                 value={dropoff}
+                autocomplete="address-level2"
                 onChange={(e) => setDropoff(e.target.value)}
               />
             </form>

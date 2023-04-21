@@ -34,6 +34,8 @@ const RideSelector = ({ pickup, dropoff }) => {
     });
   }, [data]);
 
+  console.log(ride)
+
   return (
     <Wrapper className="flex-1 overflow-y-scroll flex flex-col">
       <Title className="text-gray-500 text-center text-xs py-2 border-b">
