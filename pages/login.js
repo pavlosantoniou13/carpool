@@ -21,7 +21,8 @@ const Login = () => {
           setDoc(doc(db, "users", user.uid),{
             id: user.uid,
             name: user.displayName,
-            email: user.email
+            email: user.email,
+            UserImage: user.photoURL
           })
         } else {
           return
