@@ -180,7 +180,6 @@ function placeSuggest() {
                 country: "gr",
               }}
             accessToken={accessToken}>
-              <form onSubmit={(e) => e.preventDefault()}>
               <input
                 onChange={(e) => {
                   setOrigin(e.target.value);
@@ -201,7 +200,6 @@ function placeSuggest() {
               >
                 Going from
               </label>
-              </form>
             </AddressAutofill>
           </div>
           <div className="relative z-0 w-full mb-6 group">
@@ -211,7 +209,6 @@ function placeSuggest() {
               country: "gr",
               }}
               accessToken={accessToken}>
-             <form onSubmit={(e) => e.preventDefault()}>
              <input
                 onChange={(e) => {
                   setDestination(e.target.value);
@@ -232,7 +229,6 @@ function placeSuggest() {
               >
                 Going to{" "}
               </label>
-             </form>
             </AddressAutofill>
           </div>
           <div className="relative z-0 w-full mb-6 group">

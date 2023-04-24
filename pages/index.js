@@ -17,6 +17,10 @@ import { useEffect, useState } from "react"
 export default function Home() {
 
  const [user, setUser] = useState(null)
+ const [userName, setUserName] = useState(null)
+ const [userEmail, setUserEmail] = useState(null)
+ const [userPhoto, setUserPhoto] = useState(null)
+
  const router = useRouter()
 
  useEffect(() => {
@@ -25,15 +29,18 @@ export default function Home() {
       setUser({
         name: user.displayName,
         photoUrl: user.photoURL,
-
+        email: user.email
       })
+      setUserName(user.displayName)
+      setUserEmail(user.email)
+      setUserPhoto(user.photoURL)
     } else {
       setUser(null)
       router.push('/login')
     }
   })
  }, [])
-
+ console.log(user)
   return (
     <Wrapper className="flex flex-col  h-screen ">
       <ButtonContainer className='w-10 rounded-full absolute top-4 left-4 z-10  shadown-md cursor-pointer'>
@@ -50,9 +57,18 @@ export default function Home() {
           <UberLogo className="h-14 my-4" src="https://uspto.report/TM/85250264/mark"/>
           <Profile className="flex items-center">
             <Name className="font-bold mr-4 w-20 text-sm">{user && user.name}</Name>
+              <Link href={{
+                pathname: "/userPage",
+                query: {
+                  name: userName,
+                  photoUrl: userPhoto,
+                  email: userEmail
+                }
+              }}>
               <UserImage className="h-14 w-14 rounded-full border-gray-200 p-px mr-2"
               src={user && user.photoUrl}/>
-              {/*user && user.photoUrl*/}
+              </Link>
+              
           </Profile>
 
         </Header>
