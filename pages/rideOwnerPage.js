@@ -46,7 +46,7 @@ function RideOwnerPage() {
   return (
     <>
       <ButtonContainer className="w-10 rounded-full absolute top-4 left-4 z-10  shadown-md cursor-pointer">
-        <Link href="/allRides">
+        <Link href="/">
           <BackButton src={BackImg.src} />
         </Link>
       </ButtonContainer>
