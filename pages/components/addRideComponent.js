@@ -11,6 +11,10 @@ import Axios from "axios"
 function placeSuggest() {
     const accessToken = "pk.eyJ1IjoicGF2bG9zYW50b25pb3UxMyIsImEiOiJjbGdkeHV5OXIwOWgxM3JwN2V6cDh2eWVzIn0.1o8ix2i0YO2BXk3ErHn9Gg"
 
+
+    const router = useRouter()
+    const {userName, photoUrl, email, id} = router.query
+
     const [name, setName] = useState("")
     const [origin, setOrigin] = useState("")
     const [destination, setDestination] = useState("")
@@ -109,6 +113,11 @@ function placeSuggest() {
           carBrand: carBrand.toString(),
           fuelType: fuelType.toString(),
           price: price.toString() + "€",
+          id: id,
+          user: userName,
+          userEmail: email,
+          userImage: photoUrl
+
           
 
         })  
@@ -146,7 +155,7 @@ function placeSuggest() {
         });
       }
     }
- 
+    
     return (
       <>
         <ButtonContainer className="w-10 rounded-full absolute  left-4 z-10  shadown-md cursor-pointer">
