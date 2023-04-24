@@ -139,8 +139,8 @@ function placeSuggest() {
         setCarBrand("");
         setFuelType("");
         setPrice("");
-        setDistance("")
-        setMilage("")
+        setDistance("");
+        setMilage("");
         
       } else {
         toast.error("Please make sure all of the inputs are full", {
@@ -236,7 +236,7 @@ function placeSuggest() {
                 htmlFor="destination"
                 className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
               >
-                Going to{" "}
+                Going to
               </label>
             </AddressAutofill>
           </div>
@@ -255,7 +255,7 @@ function placeSuggest() {
               htmlFor="carBrand"
               className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
-              Car brand{" "}
+              Car brand
             </label>
           </div>
           <div className="relative z-0 w-full mb-6 group">
@@ -273,7 +273,7 @@ function placeSuggest() {
               htmlFor="fuelType"
               className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
-              Fuel type{" "}
+              Fuel type
             </label>
           </div>
           <div className="relative z-0 w-full mb-6 group">
@@ -294,7 +294,7 @@ function placeSuggest() {
               Milage{" "}
             </label>
             <div className="text-sm py-2">
-              Don't know the milage of your car?{" "}
+              Don't know the milage of your car?
               <a
                 className="hover:text-blue-500"
                 href="https://www.google.com/search?q=%7Binsert+your+car+model+and+year+of+make%7D+liter+per+killiomeres&sxsrf=APwXEddq-yEV3hX8wNbJMKWVUvZk9VwGbQ%3A1681926523713&ei=eylAZNCQK92Nxc8PvoC3qAQ&ved=0ahUKEwiQuu_HwLb-AhXdRvEDHT7ADUUQ4dUDCA8&uact=5&oq=%7Binsert+your+car+model+and+year+of+make%7D+liter+per+killiomeres&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQA0oECEEYAFAAWABgAGgAcAB4AIABAIgBAJIBAJgBAKABAQ&sclient=gws-wiz-serp"

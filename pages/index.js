@@ -59,7 +59,7 @@ export default function Home() {
         <Header className="flex justify-between items-center  w-[100%]">
           <UberLogo className="h-14 my-4" src="https://uspto.report/TM/85250264/mark"/>
           <Profile className="flex items-center">
-            <Name className="font-bold mr-4 w-20 text-sm">{user && user.name}</Name>
+            <Name className="font-bold mr-4 w-20 text-sm">{user && user.userName}</Name>
               <Link href={{
                 pathname: "/userPage",
                 query: {
