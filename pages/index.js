@@ -20,20 +20,23 @@ export default function Home() {
  const [userName, setUserName] = useState(null)
  const [userEmail, setUserEmail] = useState(null)
  const [userPhoto, setUserPhoto] = useState(null)
+ const [userId, setUserId] = useState(null)
 
  const router = useRouter()
 
  useEffect(() => {
   return onAuthStateChanged(auth, user => {
     if(user) {
+      console.log(user)
       setUser({
-        name: user.displayName,
+        userName: user.displayName,
         photoUrl: user.photoURL,
         email: user.email
       })
       setUserName(user.displayName)
       setUserEmail(user.email)
       setUserPhoto(user.photoURL)
+      setUserId(user.uid)
     } else {
       setUser(null)
       router.push('/login')
@@ -49,7 +52,7 @@ export default function Home() {
           onClick={() => {signOut(auth)}}
           src={home.src}/>
         </Link>
-        </ButtonContainer>
+      </ButtonContainer>
       <Map></Map>
       <ActionItems className="flex-1 p-4">
         {/* header */}
@@ -60,9 +63,10 @@ export default function Home() {
               <Link href={{
                 pathname: "/userPage",
                 query: {
-                  name: userName,
+                  userName: userName,
                   photoUrl: userPhoto,
-                  email: userEmail
+                  email: userEmail,
+                  id: userId
                 }
               }}>
               <UserImage className="h-14 w-14 rounded-full border-gray-200 p-px mr-2"

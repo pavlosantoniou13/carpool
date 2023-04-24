@@ -5,11 +5,11 @@ import React, { use, useEffect, useState } from 'react'
 import BackImg from '../assets/back.png'
 import tw from "styled-components"
 import Link from "next/link"
+import { useRouter } from "next/router"
 import { toast } from 'react-toastify';
 import Axios from "axios"
 function placeSuggest() {
     const accessToken = "pk.eyJ1IjoicGF2bG9zYW50b25pb3UxMyIsImEiOiJjbGdkeHV5OXIwOWgxM3JwN2V6cDh2eWVzIn0.1o8ix2i0YO2BXk3ErHn9Gg"
-
 
     const [name, setName] = useState("")
     const [origin, setOrigin] = useState("")
