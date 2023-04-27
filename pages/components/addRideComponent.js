@@ -9,6 +9,7 @@ import { useRouter } from "next/router"
 import { toast } from 'react-toastify';
 import Axios from "axios"
 import { fetchPlace } from "@/utils/fetchPlace"
+import { v4 as randomId } from "uuid"
 
 function placeSuggest() {
     const accessToken = "pk.eyJ1IjoicGF2bG9zYW50b25pb3UxMyIsImEiOiJjbGdkeHV5OXIwOWgxM3JwN2V6cDh2eWVzIn0.1o8ix2i0YO2BXk3ErHn9Gg"
@@ -102,7 +103,7 @@ function placeSuggest() {
     },[price])
     
   
-    console.log(price)
+   
     
     
     const handleCityChangePickup = async (e) => {
@@ -141,19 +142,21 @@ function placeSuggest() {
   
     //post data
     const postData = async (e) => {
-      if(name !== "" && origin !== "" && destination !== "" && carBrand !== "" && fuelType !== "" && price !== ""  ){
-        await addDoc(collection(db, "available_Rides"),{
+      if(name !== "" && origin !== "" && destination !== "" && carBrand !== "" && fuelType !== "" && price !== "" && milage !== ""  ){
+        const RandomId = randomId().toString()
+        await setDoc(doc(db, "available_Rides", RandomId),{
           name: name.toString(),
           origin: origin.toString(),
           destination: destination.toString(),
           carBrand: carBrand.toString(),
           fuelType: fuelType.toString(),
           price: price.toString() + "€",
-          id: id,
+          userId: id,
           user: userName,
           userEmail: email,
-          userImage: photoUrl
-
+          userImage: photoUrl,
+          id: RandomId,
+          consumption: milage
           
 
         })  
@@ -262,7 +265,7 @@ function placeSuggest() {
               htmlFor="name"
               className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
-              Going From
+              Going To
             </label>
             <datalist id="places">
               {autocompleteCities.map((pickup, i) => (

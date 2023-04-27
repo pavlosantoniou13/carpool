@@ -4,7 +4,7 @@ import tw from "styled-components"
 import BackImg from './assets/back.png'
 import Link from 'next/link'
 import {  db, storage } from "@/firebase"
-import { getDocs, collection,  doc, setDoc, addDoc  } from 'firebase/firestore'
+import { getDocs, collection, updateDoc, deleteField, deleteDoc, doc  } from 'firebase/firestore'
 import carImg from './assets/UberX.webp'
 
 
@@ -39,6 +39,19 @@ function UserPage() {
         }
       });
     }, [data]);
+
+    const deleteRide = (e) => {
+      ride.forEach((ride) => {
+        if(ride.id === e.target.id){
+          deleteDoc(doc(db, 'available_Rides', ride.id))
+          setRide((prev) => {
+           return prev.filter((data) => data !== ride)
+          })
+        } else {
+          return
+        }
+      })
+    }
    
   return (
     <>
@@ -69,8 +82,8 @@ function UserPage() {
             </CardDetails>
             <div className='flex flex-col text-center cursor-pointer'>
               <Price className="text-sm">{data.price}</Price>
-              <div
-              onClick={() => console.log("click")}
+              <div id={data.id}
+              onClick={deleteRide}
                 className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-1 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Delete </div>
             </div> 
           </Car>
