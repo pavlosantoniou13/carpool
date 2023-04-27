@@ -67,8 +67,12 @@ function UserPage() {
                 {data.origin + "-" + data.destination}
               </Destination>
             </CardDetails>
-            
-            <Price className="text-sm">{data.price}</Price>
+            <div className='flex flex-col text-center cursor-pointer'>
+              <Price className="text-sm">{data.price}</Price>
+              <div
+              onClick={() => console.log("click")}
+                className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-1 py-1 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Delete </div>
+            </div> 
           </Car>
         ))}
       </CarList>
