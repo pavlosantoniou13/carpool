@@ -8,6 +8,8 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { toast } from 'react-toastify';
 import Axios from "axios"
+import { fetchPlace } from "@/utils/fetchPlace"
+
 function placeSuggest() {
     const accessToken = "pk.eyJ1IjoicGF2bG9zYW50b25pb3UxMyIsImEiOiJjbGdkeHV5OXIwOWgxM3JwN2V6cDh2eWVzIn0.1o8ix2i0YO2BXk3ErHn9Gg"
 
@@ -28,6 +30,12 @@ function placeSuggest() {
     const [milage, setMilage] = useState()
     const [distance, setDistance] = useState()
     const [gasPriceData, setGasPriceData] = useState()
+
+    
+    const [autocompleteCities, setAutocompleteCities] = useState([]);
+    const [autocompleteErr, setAutocompleteErr] = useState("");
+
+
     //initializes the data for proccessing
     const intializeData = (e) => {
       e.preventDefault()
@@ -97,6 +105,39 @@ function placeSuggest() {
     console.log(price)
     
     
+    const handleCityChangePickup = async (e) => {
+      if(e.target.value === "Athina"){
+        setPickup("Athens");
+        setOrigin("Athens");
+      } else {
+        setPickup(e.target.value);
+        setOrigin(e.target.value);
+      }
+      if (!pickup) return;
+
+      const res = await fetchPlace(pickup);
+      !autocompleteCities.includes(e.target.value) &&
+      res.features &&
+      setAutocompleteCities(res.features.map((place) => place.text));
+     res.error ? setAutocompleteErr(res.error) : setAutocompleteErr("");
+    };
+
+    const handleCityChangeDropoff = async (e) => {
+      if(e.target.value === "Athina"){
+        setdropff("Athens");
+        setDestination("Athens")
+      } else {
+        setdropff(e.target.value);
+        setDestination(e.target.value)
+      }
+      if (!dropoff) return;
+
+      const res = await fetchPlace(dropoff);
+      !autocompleteCities.includes(e.target.value) &&
+      res.features &&
+      setAutocompleteCities(res.features.map((place) => place.text));
+     res.error ? setAutocompleteErr(res.error) : setAutocompleteErr("");
+    };
   
     //post data
     const postData = async (e) => {
@@ -178,62 +219,56 @@ function placeSuggest() {
             </label>
           </div>
           <div className="relative z-0 w-full mb-6 group">
-            <AddressAutofill
-              options={{
-                language: "en",
-                country: "gr",
-              }}
-            accessToken={accessToken}>
-              <input
-                onChange={(e) => {
-                  setOrigin(e.target.value);
-                  setPickup(e.target.value);
-                }}
-                value={origin}
-                type="text"
-                name="origin"
-                id="origin"
-                autocomplete="place"
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                placeholder=" "
-                required
-              />
-              <label
-                htmlFor="origin"
-                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-              >
-                Going from
-              </label>
-            </AddressAutofill>
+            <input
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=' '
+              list="places"
+              type="text"
+              id="city"
+              name="city"
+              onChange={handleCityChangePickup}
+              value={origin}
+              required
+              pattern={autocompleteCities.join("|")}
+              autoComplete="off"
+            />
+            <label
+              htmlFor="name"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              Going From
+            </label>
+            <datalist id="places">
+              {autocompleteCities.map((dropoff, i) => (
+                <option key={i}>{dropoff}</option>
+              ))}
+            </datalist>
           </div>
           <div className="relative z-0 w-full mb-6 group">
-            <AddressAutofill
-              options={{
-              language: "en",
-              country: "gr",
-              }}
-              accessToken={accessToken}>
-             <input
-                onChange={(e) => {
-                  setDestination(e.target.value);
-                  setdropff(e.target.value);
-                }}
-                value={destination}
-                type="text"
-                name="destination"
-                id="destination"
-                autocomplete="place"
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                placeholder=" "
-                required
-              />
-              <label
-                htmlFor="destination"
-                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-              >
-                Going to
-              </label>
-            </AddressAutofill>
+          <input
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=' '
+              list="places"
+              type="text"
+              id="city"
+              name="city"
+              onChange={handleCityChangeDropoff}
+              value={destination}
+              required
+              pattern={autocompleteCities.join("|")}
+              autoComplete="off"
+            />
+            <label
+              htmlFor="name"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              Going From
+            </label>
+            <datalist id="places">
+              {autocompleteCities.map((pickup, i) => (
+                <option key={i}>{pickup}</option>
+              ))}
+            </datalist>
           </div>
           <div className="relative z-0 w-full mb-6 group">
             <input
