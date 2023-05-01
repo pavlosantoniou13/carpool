@@ -4,6 +4,8 @@ import carImg from '../assets/UberX.webp'
 import {  db, storage } from "@/firebase"
 import { getDocs, collection,  doc, setDoc, addDoc  } from 'firebase/firestore'
 import {  useRouter } from 'next/router'
+import { onAuthStateChanged} from "firebase/auth"
+import { auth } from "../../firebase"
 
 const RideSelector = ({ pickup, dropoff }) => {
   const [data, setData] = useState([]);
@@ -11,6 +13,7 @@ const RideSelector = ({ pickup, dropoff }) => {
   const userColRef = collection(db, "users")
   const [ride, setRide] = useState([]);
 
+  const [CurrentUser, setCurrentUser] = useState(null)
   const [usersData, setUsersData] = useState([])
   const [user, setUser] = useState("")
   const [userName, setUserName] = useState(null)
@@ -19,6 +22,20 @@ const RideSelector = ({ pickup, dropoff }) => {
   const [userId, setUserId] = useState(null)
 
   const router = useRouter()
+
+  useEffect(() => {
+    return onAuthStateChanged(auth, user => {
+      if(user) {
+        setCurrentUser({
+          userName: user.displayName,
+          photoUrl: user.photoURL,
+          email: user.email
+        })
+      } else {
+        return
+      }
+    })
+   }, [])
 
   useEffect(() => {
     getDocs(colRef)
@@ -74,7 +91,7 @@ const RideSelector = ({ pickup, dropoff }) => {
   }
 
   useEffect(() => {
-    if(userName !== null){
+    if(userName !== null && CurrentUser.email !== userEmail){
       router.push({
         pathname: "rideOwnerPage",
         query: {
@@ -84,10 +101,20 @@ const RideSelector = ({ pickup, dropoff }) => {
           id: userId
         }
       })
-    } else {
-      return
+    } else if(userName !== null && CurrentUser.email === userEmail) {
+      router.push({
+        pathname: "userPage",
+        query: {
+          userName: userName,
+          photoUrl: userPhoto,
+          email: userEmail,
+          id: userId
+        }
+      })
     }
   }, [userEmail])
+
+  
 
   return (
     <Wrapper className="flex-1 overflow-y-scroll flex flex-col">
