@@ -13,6 +13,7 @@ function AllRides() {
     const [user, setUser] = useState("")
 
     const router = useRouter()
+    const {CurrentUser, CurrentUserPhotoUrl, CurrentUserEmail, CurrentUserId} = router.query
 
     const colRef = collection(db, "available_Rides")
     const userColRef = collection(db, "users")
@@ -66,7 +67,7 @@ function AllRides() {
     }
 
     useEffect(() => {
-      if(userName !== null){
+      if(userName !== null && CurrentUserEmail !== userEmail){
         router.push({
           pathname: "rideOwnerPage",
           query: {
@@ -76,12 +77,20 @@ function AllRides() {
             id: userId
           }
         })
-      } else {
-        return
+      } else if(userName !== null && CurrentUserEmail === userEmail) {
+        router.push({
+          pathname: "userPage",
+          query: {
+            userName: userName,
+            photoUrl: userPhoto,
+            email: userEmail,
+            id: userId
+          }
+        })
       }
     }, [userEmail])
 
-    
+
 
   return (
     <Wrapper className="flex-1 overflow-y-scroll flex flex-col">

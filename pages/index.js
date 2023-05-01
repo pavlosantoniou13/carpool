@@ -27,7 +27,6 @@ export default function Home() {
  useEffect(() => {
   return onAuthStateChanged(auth, user => {
     if(user) {
-      console.log(user)
       setUser({
         userName: user.displayName,
         photoUrl: user.photoURL,
@@ -43,7 +42,7 @@ export default function Home() {
     }
   })
  }, [])
- console.log(user)
+ 
   return (
     <Wrapper className="flex flex-col  h-screen ">
       <ButtonContainer className='w-10 rounded-full absolute top-4 left-4 z-10  shadown-md cursor-pointer'>
@@ -57,9 +56,9 @@ export default function Home() {
       <ActionItems className="flex-1 p-4">
         {/* header */}
         <Header className="flex justify-between items-center  w-[100%]">
-          <UberLogo className="h-14 my-4" src="https://uspto.report/TM/85250264/mark"/>
+          <UberLogo className="h-14 my-4" src={"https://uspto.report/TM/85250264/mark"}/>
           <Profile className="flex items-center">
-            <Name className="font-bold mr-4 w-20 text-sm">{user && user.userName}</Name>
+            <Name className="font-bold mr-4 w-20 text-l">{user && user.userName}</Name>
               <Link href={{
                 pathname: "/userPage",
                 query: {
@@ -83,7 +82,15 @@ export default function Home() {
            Ride
           </Link>
 
-          <Link href="/allRides" className="text-xl font-bold transition cursor-pointer transform hover:scale-105 rounded-lg justify-center flex-1 m-1 bg-gray-200 h-32 flex items-center flex-col">
+          <Link href={{
+                pathname: "/allRides",
+                query: {
+                  CurrentUser: userName,
+                  CurrentUserPhotoUrl: userPhoto,
+                  CurrentUserEmail: userEmail,
+                  CurrentUserId: userId
+                }
+              }} className="text-xl font-bold transition cursor-pointer transform hover:scale-105 rounded-lg justify-center flex-1 m-1 bg-gray-200 h-32 flex items-center flex-col">
           <ActionButtonImage className="h-3/5" src={carImg.src}/>
             All  Rides
           </Link>
