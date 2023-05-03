@@ -118,8 +118,8 @@ function searchFields() {
         href={{
           pathname: "/confirm",
           query: {
-            pickup: pickup,
-            dropoff: dropoff,
+            pickup: pickup.toLowerCase(),
+            dropoff: dropoff.toLowerCase(),
           },
         }}
       >

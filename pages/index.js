@@ -10,7 +10,7 @@ import { auth } from "../firebase"
 import { onAuthStateChanged, signOut } from "firebase/auth"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
-
+import FormImage from './assets/formImage.png'
 
 
 

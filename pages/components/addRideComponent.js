@@ -1,6 +1,5 @@
-import {  db, storage } from "../../firebase"
-import { AddressAutofill } from '@mapbox/search-js-react'
-import { getDocs, collection,  doc, setDoc, addDoc  } from 'firebase/firestore'
+import {  db } from "../../firebase"
+import { doc, setDoc  } from 'firebase/firestore'
 import React, { use, useEffect, useState } from 'react'
 import BackImg from '../assets/back.png'
 import tw from "styled-components"
@@ -145,11 +144,11 @@ function placeSuggest() {
       if(name !== "" && origin !== "" && destination !== "" && carBrand !== "" && fuelType !== "" && price !== "" && milage !== ""  ){
         const RandomId = randomId().toString()
         await setDoc(doc(db, "available_Rides", RandomId),{
-          name: name.toString(),
-          origin: origin.toString(),
-          destination: destination.toString(),
-          carBrand: carBrand.toString(),
-          fuelType: fuelType.toString(),
+          name: name.toString().toLowerCase(),
+          origin: origin.toString().toLowerCase(),
+          destination: destination.toString().toLowerCase(),
+          carBrand: carBrand.toString().toLowerCase(),
+          fuelType: fuelType.toString().toLowerCase(),
           price: price.toString() + "€",
           userId: id,
           user: userName,

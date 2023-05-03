@@ -105,7 +105,7 @@ function AllRides() {
       <CarList className="overflow-y-scroll">
         {data.map((data) => (
           <Car className="flex p-4 items-center" > 
-            <CarImage className="h-14 mr-2" src={carImg.src} />
+            <CarImage className="h-14 mr-2" src={data.userImage} />
             <CardDetails className="flex-1">
               <Service className="font-medium">{data.name}</Service>
               <Destination className="text-xs text-blue-500">
