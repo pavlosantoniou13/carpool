@@ -11,6 +11,7 @@ function AllRides() {
     const [data, setData] = useState([])
     const [usersData, setUsersData] = useState([])
     const [user, setUser] = useState("")
+    
 
     const router = useRouter()
     const {CurrentUser, CurrentUserPhotoUrl, CurrentUserEmail, CurrentUserId} = router.query
@@ -104,7 +105,7 @@ function AllRides() {
       </Title>
       <CarList className="overflow-y-scroll">
         {data.map((data) => (
-          <Car className="flex p-4 items-center" > 
+          <Car className="flex p-4 items-center" key={data.id} > 
             <CarImage className="h-14 mr-2" src={data.userImage} />
             <CardDetails className="flex-1">
               <Service className="font-medium">{data.name}</Service>

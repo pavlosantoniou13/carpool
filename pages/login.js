@@ -7,7 +7,6 @@ import { useRouter } from 'next/router'
 import {  db, storage } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 
-import Link from 'next/link'
 const Login = () => {
 
     const router = useRouter()
