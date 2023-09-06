@@ -1,7 +1,7 @@
 
 
 const test = 'k.eyJ1IjoicGF2bG9zYW50b25pb3UxMyIsImEiOiJjbGdkeHV5OXIwOWgxM3JwN2V6cDh2eWVzIn0.1o8ix2i0YO2BXk3ErHn9Gg'
-const mapboxglAccessToken = "pk.eyJ1IjoicGF2bG9zYW50b25pb3UxMyIsImEiOiJjbGdkeHV5OXIwOWgxM3JwN2V6cDh2eWVzIn0.1o8ix2i0YO2BXk3ErHn9Gg"
+const mapboxglAccessToken = "pk.eyJ1IjoicGF2bG9zYW50b25pb3UxMyIsImEiOiJjbG03eGJhejUwNTQ3M2tzMjR3ajl1dWJvIn0.nZXQV4m723XJmnTatffU0Q"
 
 export const fetchPlace = async (text) => {
     try {
